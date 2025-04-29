@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Code Snippets</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/vs2015.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Python Code Collection</h1>
+    </header>
+    
+    <main>
+        <div class="content">
+            <!-- Experiment Names Selector -->
+            <div class="exp-selector" id="exp-selector">
+                <div class="control-point control-point-top-left"></div>
+                <div class="control-point control-point-top-center"></div>
+                <div class="control-point control-point-top-right"></div>
+                <div class="control-point control-point-middle-left"></div>
+                <div class="control-point control-point-middle-right"></div>
+                <div class="control-point control-point-bottom-left"></div>
+                <div class="control-point control-point-bottom-center"></div>
+                <div class="control-point control-point-bottom-right"></div>
+                
+                <button class="copy-btn" id="copy-all-btn">copy</button>
+                <h2 class="exp-label">Exp names</h2>
+                
+                <div class="exp-list" id="exp-list">
+                    <!-- Experiment names will be added here dynamically -->
+                </div>
+            </div>
+
+            <!-- Code containers (hidden) -->
+            <div class="hidden-code">
+                <pre><code id="code1">import cv2
+import numpy as np
+import matplotlib.pyplot as plt 
+
+# Read color image
+img = cv2.imread('your_img', 1)
+gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Display properties
+print("Color Image")
+print("Size:", img.size)
+print("Shape:", img.shape)
+print("Class:", img.__class__)
+print("Datatype:", img.dtype)
+print("---------------------------------")
+print("Gray Image")
+print("Size:", gray_img.size)
+print("Shape:", gray_img.shape)
+print("Class:", gray_img.__class__)
+print("Datatype:", gray_img.dtype)
+print("---------------------------------")
+
+# Resize image to half
+height, width = img.shape[:2]
+resized_img = cv2.resize(img, (width//2, height//2))
+
+# Rotate images
+right_img = cv2.flip(img, 1)
+bottom_img = cv2.flip(img, 0)
+
+# Crop part of the image
+crop_img = img[50:150, 100:200]
+
+# Modify some image pixels
+mod_img = img.copy()
+mod_img[50:100, 0:50] = [255, 255, 255]  # Make white
+mod_img[200:150, 0:50] = [0, 0, 0]        # Make black
+
+# Plotting images
+plt.figure(figsize=(15, 10))
+
+plt.subplot(2, 4, 1)
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("Original")
+plt.axis('off')
+
+plt.subplot(2, 4, 2)
+plt.imshow(gray_img, cmap='gray')
+plt.title("Gray Image")
+plt.axis('off')
+
+plt.subplot(2, 4, 3)
+plt.imshow(cv2.cvtColor(resized_img, cv2.COLOR_BGR2RGB))
+plt.title("Resized Image")
+plt.axis('off')
+
+plt.subplot(2, 4, 4)
+plt.imshow(cv2.cvtColor(right_img, cv2.COLOR_BGR2RGB))
+plt.title("Right Image")
+plt.axis('off')
+
+plt.subplot(2, 4, 5)
+plt.imshow(cv2.cvtColor(bottom_img, cv2.COLOR_BGR2RGB))
+plt.title("Bottom Image")
+plt.axis('off')
+
+plt.subplot(2, 4, 6)
+plt.imshow(cv2.cvtColor(crop_img, cv2.COLOR_BGR2RGB))
+plt.title("Cropped Image")
+plt.axis('off')
+
+plt.subplot(2, 4, 7)
+plt.imshow(cv2.cvtColor(mod_img, cv2.COLOR_BGR2RGB))
+plt.title("Modified Image")
+plt.axis('off')
+
+plt.show()</code></pre>
+                <div id="hidden-code-containers"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>     
